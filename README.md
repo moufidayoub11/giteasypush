@@ -45,16 +45,16 @@ For convenience, you may want to add the script to your system PATH. This allows
 chmod +x giteasypush.sh
 ```
 
-2. Move the script into a directory within your system PATH, such as `/usr/local/bin`:
+2. Move the script into a directory within your system PATH, such as `/usr/local/bin` and rename it so you can remember the command name (e.g. gep):
 
 ```
-mv giteasypush.sh /usr/local/bin
+mv giteasypush.sh /usr/local/bin/gep
 ```
 
 Now, you can run the script from anywhere with this simple command:
 
 ```
-giteasypush.sh yourfile 'Your commit message'
+gep yourfile 'Your commit message'
 ```
 
 #### Windows:
