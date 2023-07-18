@@ -9,7 +9,7 @@
 4. [Making GitEasyPush Globally Accessible](#making-giteasypush-globally-accessible)
 
 ## Introduction <a name="introduction"></a>
-**GitEasyPush** is a streamlined command-line tool created for developers who often work with Git repositories. It automates the process of staging, committing, and pushing a specific file, thus simplifying your Git workflow.
+**GitEasyPush** is a streamlined command-line tool created for developers who often work with Git repositories. It automates the process of staging, committing, and pushing a specific file(s), thus simplifying your Git workflow.
 
 ## Getting Started <a name="getting-started"></a>
 
@@ -24,14 +24,14 @@ git clone https://github.com/moufidayoub11/giteasypush.git
 ```
 
 ## Usage <a name="usage"></a>
-To use **GitEasyPush**, run the script with two parameters: the filename and the commit message. 
+To use **GitEasyPush**, run the script with two parameters: commit message and filename(s). 
 
 Here's the format:
 ```
-./giteasypush.sh filename 'Your distinct commit message'
+./giteasypush.sh 'commit message' filename1 [filename2] ...
 ```
 
-Remember to replace `filename` and `'Your distinct commit message'` with your actual filename and desired commit message, respectively.
+Remember to replace `filename1 [filename2]` and `'commit message'` with your desired commit message and an actual filename(s), respectively.
 
 ## Making GitEasyPush Globally Accessible <a name="making-giteasypush-globally-accessible"></a>
 
@@ -54,7 +54,7 @@ mv giteasypush.sh /usr/local/bin/gep
 Now, you can run the script from anywhere with this simple command:
 
 ```
-gep yourfile 'Your commit message'
+gep 'commit message' filename1 [filename2] ...
 ```
 
 #### Windows:
