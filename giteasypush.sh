@@ -3,12 +3,16 @@ set -e
 
 SCRIPT_NAME=$(basename "$0")
 
+# Display usage instructions if the script is not called with the correct arguments
 function usage() {
   echo "Error: You need to provide a minimum of 2 arguments - a commit message and one or more filenames"
-  echo "Usage: ./$SCRIPT_NAME 'commit message' filename1 [filename2] ..."
+  echo "Usage: ./$SCRIPT_NAME 'commit message' [filename1] [filename2] ..."
+  echo "       ./$SCRIPT_NAME 'commit message' ."
+  echo "       ./$SCRIPT_NAME 'commit message' (same as the one before)"
   exit 1
 }
 
+# Check if a file exists
 function file_check() {
   if [ ! -f "$1" ]; then
     echo "Error: File $1 does not exist"
@@ -16,30 +20,47 @@ function file_check() {
   fi
 }
 
+# Perform Git operations - add files, commit with message, and push
 function git_ops() {
-  for file in "${FILES[@]}"; do
-    git add "$file"
-  done
+  if [ "$ADD_ALL" = true ]; then
+    git add .
+  else
+    for file in "${FILES[@]}"; do
+      git add "$file"
+    done
+  fi
   git commit -m "$MESSAGE"
   git push
 }
 
-# Check if there are at least 2 arguments
-if [ $# -lt 2 ]; then
+# Check if there are at least 1 arguments
+if [ $# -lt 1 ]; then
   usage
 fi
 
 # Get commit message and filenames
 MESSAGE="$1"
 shift
-FILES=($@)
+if [ $# -eq 0 ]; then
+  if [ "$1" = "." ]; then
+    ADD_ALL=true
+    shift
+  else
+    usage
+  fi
+else
+  ADD_ALL=false
+  FILES=("$@")  # Enclose the array in double quotes to handle filenames with spaces correctly
+fi
 
-# Check if each file exists and perform git operations
-for file in "${FILES[@]}"; do
-  file_check "$file"
-done
+# Check if each file exists and perform Git operations
+if [ "$ADD_ALL" = false ]; then
+  for file in "${FILES[@]}"; do
+    file_check "$file"
+  done
+fi
 
 git_ops
 
-echo "Successfully added, committed, and pushed files to git with message: $MESSAGE"
+echo "Successfully added, committed, and pushed files to Git with message: $MESSAGE"
 exit 0
