@@ -8,7 +8,7 @@ function usage() {
   echo "Error: You need to provide a minimum of 2 arguments - a commit message and one or more filenames"
   echo "Usage: ./$SCRIPT_NAME 'commit message' [filename1] [filename2] ..."
   echo "       ./$SCRIPT_NAME 'commit message' ."
-  echo "       ./$SCRIPT_NAME 'commit message' (same as the one before)"
+  echo "       ./$SCRIPT_NAME 'commit message'"
   exit 1
 }
 
@@ -42,12 +42,10 @@ fi
 MESSAGE="$1"
 shift
 if [ $# -eq 0 ]; then
-  if [ "$1" = "." ]; then
-    ADD_ALL=true
-    shift
-  else
-    usage
-  fi
+  ADD_ALL=true
+elif [ "$1" = "." ]; then
+  ADD_ALL=true
+  shift
 else
   ADD_ALL=false
   FILES=("$@")  # Enclose the array in double quotes to handle filenames with spaces correctly
