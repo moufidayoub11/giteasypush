@@ -27,8 +27,11 @@ git clone https://github.com/moufidayoub11/giteasypush.git
 To use **GitEasyPush**, run the script with two parameters: commit message and filename(s). 
 
 Here's the format:
+
 ```
 ./giteasypush.sh 'commit message' filename1 [filename2] ...
+./giteasypush.sh 'commit message' . (To select all files)
+./giteasypush.sh 'commit message' (To select all files)
 ```
 
 Remember to replace `filename1 [filename2]` and `'commit message'` with your desired commit message and an actual filename(s), respectively.
@@ -55,6 +58,8 @@ Now, you can run the script from anywhere with this simple command:
 
 ```
 gep 'commit message' filename1 [filename2] ...
+gep 'commit message' . (To select all files)
+gep 'commit message' (To select all files)
 ```
 
 #### Windows:
