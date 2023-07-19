@@ -3,7 +3,7 @@ set -e
 
 SCRIPT_NAME=$(basename "$0")
 
-# Display usage instructions if the script is not called with the correct arguments
+# Display usage instructions if the script is called with the incorrect arguments
 function usage() {
   echo "Error: You need to provide a minimum of 2 arguments - a commit message and one or more filenames"
   echo "Usage: ./$SCRIPT_NAME 'commit message' [filename1] [filename2] ..."
