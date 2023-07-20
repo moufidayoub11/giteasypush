@@ -2,35 +2,27 @@
 set -e
 
 SCRIPT_NAME=$(basename "$0")
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m'
 
 # Display usage instructions if the script is called with the incorrect arguments
 function usage() {
-  echo "Error: You need to provide a minimum of 2 arguments - a commit message and one or more filenames"
-  echo "Usage: ./$SCRIPT_NAME 'commit message' [filename1] [filename2] ..."
-  echo "       ./$SCRIPT_NAME 'commit message' ."
-  echo "       ./$SCRIPT_NAME 'commit message'"
+	echo -e "${RED}Error: You need to provide a minimum of 1 argument - a commit message and/or ./filename(s)${NC}"
+  echo -e "${YELLOW}Usage: ./$SCRIPT_NAME 'commit message'"
+  echo -e "       ./$SCRIPT_NAME 'commit message' [filename1] [filename2] ..."
+  echo -e "       ./$SCRIPT_NAME 'commit message' .${NC}"
   exit 1
 }
 
 # Check if a file exists
 function file_check() {
   if [ ! -f "$1" ]; then
-    echo "Error: File $1 does not exist"
+    echo -e "${RED}Error: File $1 does not exist${NC}"
     exit 1
   fi
-}
-
-# Perform Git operations - add files, commit with message, and push
-function git_ops() {
-  if [ "$ADD_ALL" = true ]; then
-    git add .
-  else
-    for file in "${FILES[@]}"; do
-      git add "$file"
-    done
-  fi
-  git commit -m "$MESSAGE"
-  git push
 }
 
 # Check if there are at least 1 arguments
@@ -58,7 +50,22 @@ if [ "$ADD_ALL" = false ]; then
   done
 fi
 
+
+# Perform Git operations - add files, commit with message, and push
+function git_ops() {
+  if [ "$ADD_ALL" = true ]; then
+    git add .
+  else
+    for file in "${FILES[@]}"; do
+      git add "$file"
+    done
+  fi
+  git commit -m "$MESSAGE"
+  git push
+}
+
+
 git_ops
 
-echo "Successfully added, committed, and pushed files to Git with message: $MESSAGE"
+echo "${GREEN}Successfully added, committed, and pushed files to Git with message:${NC} ${YELLOW}$MESSAGE${NC}"
 exit 0
