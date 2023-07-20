@@ -17,6 +17,11 @@ function usage() {
   exit 1
 }
 
+# New function for running a command and handling its error
+function run() {
+  ERR_MSG=$("$@" 2>&1) || { echo -e "${RED}${ERR_MSG}${NC}"; exit 1; }
+}
+
 # Check if a file exists
 function file_check() {
   if [ ! -f "$1" ]; then
@@ -54,14 +59,14 @@ fi
 # Perform Git operations - add files, commit with message, and push
 function git_ops() {
   if [ "$ADD_ALL" = true ]; then
-    git add .
+   run  git add . 
   else
     for file in "${FILES[@]}"; do
-      git add "$file"
+      run git add "$file"
     done
   fi
-  git commit -m "$MESSAGE"
-  git push
+  run git commit -m "$MESSAGE"
+  run git push
 }
 
 
