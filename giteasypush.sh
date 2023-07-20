@@ -67,5 +67,5 @@ function git_ops() {
 
 git_ops
 
-echo "${GREEN}Successfully added, committed, and pushed files to Git with message:${NC} ${YELLOW}$MESSAGE${NC}"
+echo "${GREEN}Successfully added, committed, and pushed files to Git with message:${NC} ${YELLOW}$MESSAGE ${NC}"
 exit 0
