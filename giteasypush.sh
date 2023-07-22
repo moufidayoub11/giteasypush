@@ -57,7 +57,10 @@ fi
 
 
 # Perform Git operations - add files, commit with message, and push
-function git_ops() {
+function git_ops() {  
+
+  run git pull
+
   if [ "$ADD_ALL" = true ]; then
    run  git add . 
   else
