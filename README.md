@@ -24,9 +24,7 @@ git clone https://github.com/moufidayoub11/giteasypush.git
 ```
 
 ## Usage <a name="usage"></a>
-To use **GitEasyPush**, run the script with two parameters: commit message and filename(s). 
-
-Here's the format:
+To use **GitEasyPush**, run the script following one of the examples:
 
 ```
 ./giteasypush.sh 'commit message' (To select all files)
@@ -54,7 +52,7 @@ chmod +x giteasypush.sh
 sudo cp giteasypush.sh /usr/local/bin/gep
 ```
 
-Now, you can run the script from anywhere with this simple command:
+Now, you can run the script from anywhere with any of the following commands:
 
 ```
 gep 'commit message' (To select all files)
@@ -68,14 +66,16 @@ For Windows users, you can add the script to your system PATH using the followin
 
 1. Copy the `giteasypush.sh` file to a directory of your choice (e.g., `C:\scripts`).
 
-2. Press the Windows key, search for "Environment Variables," and select "Edit the system environment variables."
+2. Rename it so you can remember the command name (e.g. gep)
 
-3. In the System Properties window, go to the "Advanced" tab and click "Environment Variables."
+3. Press the Windows key, search for "Environment Variables," and select "Edit the system environment variables."
 
-4. In the Environment Variables window, under "System variables," find the `Path` variable. Select it and click "Edit."
+4. In the System Properties window, go to the "Advanced" tab and click "Environment Variables."
 
-5. In the Edit Environment Variable window, click "New" and then "Browse." Navigate to the directory where you copied `giteasypush.sh` (in this example, `C:\scripts`), select it and click "OK."
+5. In the Environment Variables window, under "System variables," find the `Path` variable. Select it and click "Edit."
 
-6. Click "OK" on all open windows to close them.
+6. In the Edit Environment Variable window, click "New" and then "Browse." Navigate to the directory where you copied `giteasypush.sh` (in this example, `C:\scripts`), select it and click "OK."
 
-You should now be able to run `giteasypush.sh` from the Command Prompt or PowerShell. Note that on Windows, you may need to install a Unix-like command line utility, such as Git Bash or WSL, to run Bash scripts.
+7. Click "OK" on all open windows to close them.
+
+You should now be able to run `gep` from the Command Prompt or PowerShell. Note that on Windows, you may need to install a Unix-like command line utility, such as Git Bash or WSL, to run Bash scripts.
