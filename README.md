@@ -7,6 +7,8 @@
     2. [Installation](#installation)
 3. [Usage](#usage)
 4. [Making GitEasyPush Globally Accessible](#making-giteasypush-globally-accessible)
+5. [Contribution](#contribution)
+
 
 ## Introduction <a name="introduction"></a>
 **GitEasyPush** is a streamlined command-line tool created for developers who often work with Git repositories. It automates the process of staging, committing, and pushing a specific file(s), thus simplifying your Git workflow.
@@ -79,3 +81,9 @@ For Windows users, you can add the script to your system PATH using the followin
 7. Click "OK" on all open windows to close them.
 
 You should now be able to run `gep` from the Command Prompt or PowerShell. Note that on Windows, you may need to install a Unix-like command line utility, such as Git Bash or WSL, to run Bash scripts.
+
+## Contribution <a name="contribution"></a>
+
+Contributions to **GitEasyPush** are welcome! If you find any issues or have suggestions, please open a new issue on the [GitHub repository](https://github.com/moufidayoub11/giteasypush/issues).
+
+We appreciate your support! Happy coding! 🚀
