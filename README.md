@@ -6,6 +6,8 @@
     1. [Prerequisites](#prerequisites)
     2. [Installation](#installation)
 3. [Usage](#usage)
+    1. [Usage with the -e Option](#usage-with-the-e-option)
+    2. [Push all changes](#usage-with-all)
 4. [Making GitEasyPush Globally Accessible](#making-giteasypush-globally-accessible)
 5. [Contribution](#contribution)
 
@@ -29,12 +31,29 @@ git clone https://github.com/moufidayoub11/giteasypush.git
 To use **GitEasyPush**, run the script following one of the examples:
 
 ```
-./giteasypush.sh 'commit message' (To select all files)
-./giteasypush.sh 'commit message' . (To select all files)
 ./giteasypush.sh 'commit message' filename1 [filename2] ...
 ```
 
 Remember to replace `filename1 [filename2]` and `'commit message'` with your desired commit message and an actual filename(s), respectively.
+
+### Usage with the -e Option <a name="usage-with-the-e-option"></a>
+
+You can now use the `-e` option to stage and commit only modified files automatically. If you provide the `-e` option, you should not specify additional filenames. Here are some examples of how to use the `-e` option:
+
+```bash
+# Stage only modified files and commit with a message
+./giteasypush.sh -e 'commit message'
+```
+Please note that using the -e option will stage only modified files.
+
+### Push all changes (including new and modified files) <a name="usage-with-all"></a>
+
+If you want to Push all changes (including new files), you can use the script without the -e option:
+
+```bash
+./giteasypush.sh 'commit message'
+./giteasypush.sh 'commit message' .
+```
 
 ## Making GitEasyPush Globally Accessible <a name="making-giteasypush-globally-accessible"></a>
 
