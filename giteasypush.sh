@@ -10,8 +10,8 @@ NC='\033[0m'
 
 # Display usage instructions if the script is called with the incorrect arguments
 function usage() {
-	echo -e "${RED}Error: You need to provide a minimum of 1 argument - a commit message and/or ./filename(s)${NC}"
-  echo -e "${YELLOW}Usage: ./$SCRIPT_NAME 'commit message'"
+  echo -e "${RED}Error: You need to provide a minimum of 1 argument - a commit message and/or ./filename(s)${NC}"
+  echo -e "${YELLOW}Usage: ./$SCRIPT_NAME [-e] 'commit message'"
   echo -e "       ./$SCRIPT_NAME 'commit message' [filename1] [filename2] ..."
   echo -e "       ./$SCRIPT_NAME 'commit message' .${NC}"
   exit 1
@@ -36,9 +36,16 @@ if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
   exit 1
 fi
 
-# Check if there are at least 1 arguments
+# Check if there are at least 1 argument
 if [ $# -lt 1 ]; then
   usage
+fi
+
+# Check if the first argument is '-e' (for staging only modified files)
+STAGE_MODIFIED=false
+if [ "$1" = "-e" ]; then
+  STAGE_MODIFIED=true
+  shift
 fi
 
 # Get commit message and filenames
@@ -54,6 +61,12 @@ else
   FILES=("$@")  # Enclose the array in double quotes to handle filenames with spaces correctly
 fi
 
+# Check if the -e option is used and no additional filenames are provided
+if [ "$STAGE_MODIFIED" = true ] && [ "$ADD_ALL" = false ]; then
+  echo -e "${RED}Error: When using the -e option, you can't specify additional filenames.${NC}"
+  usage
+fi
+
 # Check if each file exists and perform Git operations
 if [ "$ADD_ALL" = false ]; then
   for file in "${FILES[@]}"; do
@@ -61,14 +74,17 @@ if [ "$ADD_ALL" = false ]; then
   done
 fi
 
-
 # Perform Git operations - add files, commit with message, and push
 function git_ops() {  
 
   run git pull
 
   if [ "$ADD_ALL" = true ]; then
-   run  git add . 
+    if [ "$STAGE_MODIFIED" = true ]; then
+      run git add -u  # Stage only modified files
+    else
+      run git add .   # Stage all changes
+    fi
   else
     for file in "${FILES[@]}"; do
       run git add "$file"
@@ -77,7 +93,6 @@ function git_ops() {
   run git commit -m "$MESSAGE"
   run git push
 }
-
 
 git_ops
 
