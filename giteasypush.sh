@@ -30,6 +30,12 @@ function file_check() {
   fi
 }
 
+# Check if in a git directory
+if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+  echo -e "${RED}Error: Not in a Git repository.${RED}"
+  exit 1
+fi
+
 # Check if there are at least 1 arguments
 if [ $# -lt 1 ]; then
   usage
